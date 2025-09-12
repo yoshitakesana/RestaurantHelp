@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}注文サイト{% endblock %}
+
+<!--ヘッダー部分-->
+{% block header %}
+<h1>いらっしゃいませ！●●店へ！</h1>
+{% endblock %}
+
+
+<!--コンテンツ部分-->
+{% block contents %}
+<h1>ここにメニューを並べる（仮）</h1>
+
+<p>カテゴリ</p>
+<p>フード</p><p>ドリンク</p><p>おつまみ</p>
+
+
+
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像">
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像">
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像">
+
+
+
+{% endblock %}

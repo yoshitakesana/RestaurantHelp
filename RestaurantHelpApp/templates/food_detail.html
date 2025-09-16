@@ -1,3 +1,31 @@
 {% extends 'base.html' %}
 
 {% load static %}
+
+{% block title %}商品詳細{% endblock %}
+
+<!--ヘッダー部分-->
+{% block header %}
+<h1>いらっしゃいませ！●●店へ！</h1>
+{% endblock %}
+
+
+<!--コンテンツ部分-->
+{% block contents %}
+<h1>おにぎり</h1>
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像" width="200" height="200">
+<P>２００円</P>
+
+<button>カートに入れる</button>
+
+
+<p>----------------</p>
+<p>ハンバーガーメニューの内容↓</p>
+<p>注文履歴</p>
+<p>従業員呼び出し</p>
+<p>従業員の方はこちらからログインしてください</p>
+
+
+
+
+{% endblock %}

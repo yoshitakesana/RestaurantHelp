@@ -7,21 +7,23 @@
 <!--ヘッダー部分-->
 {% block header %}
 <h1>いらっしゃいませ！●●店へ！</h1>
+<p>----ここまでがヘッダー↑-----</p>
 {% endblock %}
 
 
 <!--コンテンツ部分-->
 {% block contents %}
-<h1>ここにメニューを並べる（仮）</h1>
+<h1>メニュー 一覧</h1>
 
 <p>カテゴリ</p>
-<p>フード</p><p>ドリンク</p><p>おつまみ</p>
+
+<button>フード</button><button>ドリンク</button>
 
 
-
-<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像">
-<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像">
-<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像">
+<p>ここに食べ物の写真を並べる↓</p>
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像" width="200" height="200">
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像" width="200" height="200">
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像" width="200" height="200">
 
 
 

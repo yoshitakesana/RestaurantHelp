@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %} </title>
+    <title>{% block title %}index{% endblock %} </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
@@ -12,7 +12,14 @@
 <body>
     <header>{% block header %}{% endblock %}</header>
 
-    <footer>このサイトに関するお問い合わせはこちら</footer>
+
+    {% block contents %}{% endblock %}
+
+    <footer>
+        <p>------ここからがフッター↓-----</p>
+        <p>このサイトに関するお問い合わせはこちら</p>
+        <p>外部リンクサイトなど、、、</p>
+    </footer>
 
 </body>
 </html>

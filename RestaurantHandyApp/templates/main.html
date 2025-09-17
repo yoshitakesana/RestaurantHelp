@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}アルバイト専用サイト{% endblock %}
+
+<!--ヘッダー部分-->
+{% block header %}
+<h1>アルバイト専用サイト</h1>
+<p>ようこそ　●●さん　ログアウト</p>
+{% endblock %}
+
+
+<!--コンテンツ部分-->
+{% block contents %}
+
+
+<p>カテゴリー</p>
+<p>フード</p><p>ドリンク</p><p>おつまみ</p>
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像" width="200" height="200"><p>おにぎり 2個 220円 </p><button>完了</button><button>調理中</button>
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像" width="200" height="200"><p>おにぎり 2個 220円 </p><button>完了</button><button>調理中</button>
+<img src="{% static 'assets/img/onigiri.jpg' %}" alt="おにぎり画像" width="200" height="200"><p>おにぎり 2個 220円 </p><button>完了</button><button>調理中</button>
+
+
+
+
+
+{% endblock %}

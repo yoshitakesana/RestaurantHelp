@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'RestaurantEmpApp/base.html' %}
 
 {% load static %}
 
@@ -13,7 +13,7 @@
 
 <!--コンテンツ部分-->
 {% block contents %}
-<p>従業員編集</p>
+<p><a href="{% url 'EditEmployee' %}">従業員編集</a></p>
 <p>メニュー編集</p>
 <p>店長変更</p>
 

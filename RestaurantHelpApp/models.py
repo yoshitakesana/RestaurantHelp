@@ -44,7 +44,7 @@ class Menu(models.Model):
     is_deleted = models.BooleanField(default=False)  # 削除フラグ（論理削除用）
 
     def __str__(self):
-        return f"{self.name} ({self.price}円)"
+        return f"{self.name} ({self.price * 1.1}円)"
 
 
 # 注文テーブル
@@ -54,7 +54,7 @@ class Order(models.Model):
         'Shop',
         on_delete=models.CASCADE
     )  # 店舗ID（外部キー）
-    menu_id = models.ForeignKey(
+    product_id = models.ForeignKey(
         'Menu',
         on_delete=models.CASCADE
     )  # 商品ID（外部キー）
@@ -68,4 +68,21 @@ class Order(models.Model):
     quantity = models.PositiveIntegerField(default=1)  # 数量
 
     def __str__(self):
-        return f"Order {self.order_id}: {self.menu_id.name} x {self.quantity} ({'完了' if self.payment_flag else '未会計'})"
+        return f"Order {self.order_id}: {self.product_id.name} x {self.quantity} ({'完了' if self.payment_flag else '未会計'})"
+
+
+# 席テーブル
+class Seat(models.Model):
+    seat_id = models.AutoField(primary_key=True, db_column="seat_id")
+    shop = models.ForeignKey("Shop", on_delete=models.CASCADE, db_column="shop_id", related_name="seats")
+    seat_number = models.CharField(max_length=32, db_column="seat_number")  # 店長が設定する表示名
+
+    created_at = models.DateTimeField(auto_now_add=True, db_column="created_at")
+    updated_at = models.DateTimeField(auto_now=True, db_column="updated_at")
+
+    class Meta:
+        db_table = "seat"
+        unique_together = (("shop", "seat_number"),)
+
+    def __str__(self):
+        return f"{self.shop.name} - {self.seat_number}"

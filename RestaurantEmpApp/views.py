@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 
 
 # ログインページ
-class IndexView(TemplateView):
-    template_name = 'RestaurantEmpApp/index.html'
+class LoginView(TemplateView):
+    template_name = 'RestaurantEmpApp/login.html'
 
 #社員さんのメニューページ
 class MenuView(TemplateView):

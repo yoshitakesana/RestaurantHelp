@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import IndexView, EditEmployeeView, MenuView,AddEmployeeView,DetailEmployeeView,EditMenuView,DetailMenuView,AddMenuView,EditManagerView
+from .views import LoginView, EditEmployeeView, MenuView,AddEmployeeView,DetailEmployeeView,EditMenuView,DetailMenuView,AddMenuView,EditManagerView
 
 urlpatterns = [
-      # トップページ
-    path('', IndexView.as_view(), name='index'),
+      #ログインページ
+    path('', LoginView.as_view(), name='login'),
      # メニュー画面
     path('menu/', MenuView.as_view(), name='menu'), 
      # 従業員編集画面

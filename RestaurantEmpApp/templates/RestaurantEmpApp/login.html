@@ -8,6 +8,15 @@
 {% endblock %}
 
 {% block contents %}
+
+<h2>社員ログイン</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">ログイン</button>
+</form>
+
+
 <div style="display: flex; justify-content: center; align-items: center; min-height: 60vh;">
   <div style="width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9; box-shadow: 0px 2px 6px rgba(0,0,0,0.1);">
 

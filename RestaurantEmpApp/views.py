@@ -4,7 +4,9 @@ from django.views.generic.edit import UpdateView, CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Employee
 from .forms import EmployeeLoginForm
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import EmployeeCreateForm
+from .forms import EmployeeForm
 
 # ログインページ
 class EmployeeLoginView(LoginView):
@@ -25,19 +27,12 @@ class EditEmployeeView(UpdateView):
     template_name = 'RestaurantEmpApp/EditEmployee.html'
     success_url = reverse_lazy('menu')
 
+#従業員追加
 class AddEmployeeView(CreateView):
     model = Employee
-    fields = ['username', 'password', 'name', 'shop_id', 'role']
+    form_class = EmployeeForm
     template_name = 'RestaurantEmpApp/AddEmployee.html'
     success_url = reverse_lazy('menu')
-
-    def form_valid(self, form):
-        # パスワードをハッシュ化して保存
-        user = form.save(commit=False)
-        user.set_password(form.cleaned_data['password'])
-        user.save()
-        return super().form_valid(form)
-
 #従業員詳細ページ
 class DetailEmployeeView(TemplateView):
     template_name='RestaurantEmpApp/DetailEmployee.html'

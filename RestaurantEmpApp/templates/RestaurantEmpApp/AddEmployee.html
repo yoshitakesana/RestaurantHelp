@@ -13,15 +13,15 @@
 <!--コンテンツ部分-->
 {% block contents %}
 
-<h1>従業員追加</h1>
-<p>追加する従業員の情報を入力してください</p>
+<h1>アルバイト追加</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">登録</button>
+</form>
 
-<p>名前</p>
-<p>ID</p>
-<p>※店舗IDは店長の情報から持ってくる</p>
-<p>パスワード</p>
 
-<p>登録</p>
+
 
 
 

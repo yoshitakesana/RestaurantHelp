@@ -1,5 +1,5 @@
 from django.urls import path, reverse_lazy
-from .views import EmployeeLoginView, EditEmployeeView, MenuView,AddEmployeeView,DetailEmployeeView,EditMenuView,DetailMenuView,AddMenuView,EditManagerView
+from .views import EmployeeLoginView, EditEmployeeView, MenuView,AddEmployeeView,DetailEmployeeView,EditMenuView,DetailMenuView,AddMenuView,EditManagerView, DeleteEmployeeView
 from django.views.generic.edit import UpdateView
 from .models import Employee
 
@@ -12,6 +12,8 @@ urlpatterns = [
   path('EditEmployee/', EditEmployeeView.as_view(), name='EditEmployee'),
   # 個別従業員編集ページ
   path('EditEmployee/<int:pk>/', UpdateView.as_view(model=Employee, fields=['name', 'shop_id', 'role'], template_name='RestaurantEmpApp/EditEmployeeDetail.html', success_url=reverse_lazy('EditEmployee')), name='EditEmployeeDetail'),
+  # 従業員削除
+  path('DeleteEmployee/<int:pk>/', DeleteEmployeeView.as_view(), name='DeleteEmployee'),
     #従業員追加画面
     path('AddEmployee/',AddEmployeeView.as_view(),name='AddEmployee'),
     #選択した従業員の詳細画面

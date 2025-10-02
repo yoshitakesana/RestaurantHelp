@@ -17,17 +17,25 @@
 <h1>従業員一覧</h1>
 <p>編集する従業員を選択してください</p>
 
+
 <table>
 	<tr>
 		<th>従業員ID</th>
 		<th>名前</th>
 		<th>編集</th>
+		<th>削除</th>
 	</tr>
 	{% for emp in employees %}
 	<tr>
 		<td>{{ emp.employee_id }}</td>
 		<td>{{ emp.name }}</td>
 		<td><a href="{% url 'EditEmployeeDetail' emp.pk %}">編集</a></td>
+		<td>
+		  <form method="post" action="{% url 'DeleteEmployee' emp.pk %}" style="display:inline;">
+		    {% csrf_token %}
+		    <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
+		  </form>
+		</td>
 	</tr>
 	{% empty %}
 	<tr><td colspan="4">従業員がいません</td></tr>

@@ -1,0 +1,12 @@
+{% extends 'RestaurantEmpApp/base.html' %}
+{% block title %}従業員削除確認{% endblock %}
+{% block header %}
+<h1>従業員削除確認</h1>
+{% endblock %}
+{% block contents %}
+<p>本当に「{{ object.name }}」さん（ID: {{ object.employee_id }}）を削除しますか？</p>
+<form method="post">{% csrf_token %}
+    <button type="submit">削除する</button>
+    <a href="{% url 'EditEmployee' %}">キャンセル</a>
+</form>
+{% endblock %}

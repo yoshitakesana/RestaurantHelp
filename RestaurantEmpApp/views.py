@@ -1,12 +1,18 @@
+
+# 必要なimportを先頭にまとめる
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView
-from django.views.generic.edit import UpdateView, CreateView
+from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
-from .models import Employee
-from .forms import EmployeeLoginForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import EmployeeCreateForm
-from .forms import EmployeeForm
+from .models import Employee
+from .forms import EmployeeLoginForm, EmployeeCreateForm, EmployeeForm
+
+# 従業員削除
+class DeleteEmployeeView(LoginRequiredMixin, DeleteView):
+    model = Employee
+    template_name = 'RestaurantEmpApp/confirm_delete.html'
+    success_url = reverse_lazy('EditEmployee')
 
 # ログインページ
 class EmployeeLoginView(LoginView):

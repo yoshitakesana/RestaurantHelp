@@ -1,5 +1,4 @@
 {% extends 'RestaurantEmpApp/base.html' %}
-
 {% load static %}
 
 {% block title %}従業員編集{% endblock %}
@@ -9,21 +8,18 @@
 <h1>社員専用サイト</h1>
 {% endblock %}
 
-
 <!--コンテンツ部分-->
 {% block contents %}
 
-<h1>アルバイト追加</h1>
+<h1>従業員追加</h1>
+
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  <p>店舗ID: <input type="text" name="shop_id" value="{{ form.shop_id.value }}" readonly></p>
+  {{ form.username.label }}: {{ form.username }}<br>
+  {{ form.name.label }}: {{ form.name }}<br>
+  {{ form.password.label }}: {{ form.password }}<br>
   <button type="submit">登録</button>
 </form>
-
-
-
-
-
-
 
 {% endblock %}

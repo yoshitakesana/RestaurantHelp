@@ -36,7 +36,11 @@ class EmployeeForm(forms.ModelForm):
         user = super().save(commit=False)
         # パスワードをハッシュ化
         user.set_password(self.cleaned_data['password'])
-        # role は変更せず None のまま
+
+        # role を必ず None に設定
+        user.role = None  
+
         if commit:
             user.save()
         return user
+

@@ -13,13 +13,28 @@
 <!--コンテンツ部分-->
 {% block contents %}
 
+
 <h1>従業員一覧</h1>
 <p>編集する従業員を選択してください</p>
 
-<p>大原花子　編集する</p>
-<p>大原太郎　編集する</p>
+<table>
+	<tr>
+		<th>従業員ID</th>
+		<th>名前</th>
+		<th>編集</th>
+	</tr>
+	{% for emp in employees %}
+	<tr>
+		<td>{{ emp.employee_id }}</td>
+		<td>{{ emp.name }}</td>
+		<td><a href="{% url 'EditEmployeeDetail' emp.pk %}">編集</a></td>
+	</tr>
+	{% empty %}
+	<tr><td colspan="4">従業員がいません</td></tr>
+	{% endfor %}
+</table>
 
-<p>従業員を追加する</p>
+<p><a href="{% url 'AddEmployee' %}">従業員を追加する</a></p>
 
 
 

@@ -20,19 +20,42 @@ class EmployeeLoginView(LoginView):
 class MenuView(TemplateView):
     template_name='RestaurantEmpApp/menu.html'
 
-# 従業員編集(UpdateView)
-class EditEmployeeView(UpdateView):
+
+# 従業員一覧(ListView)＋編集リンク
+from django.views.generic import ListView
+
+class EditEmployeeView(LoginRequiredMixin, ListView):
     model = Employee
-    fields = ['name', 'shop_id', 'role']
     template_name = 'RestaurantEmpApp/EditEmployee.html'
-    success_url = reverse_lazy('menu')
+    context_object_name = 'employees'
+
+    def get_queryset(self):
+        # roleが空またはNoneの従業員のみ返す
+        return Employee.objects.filter(role__isnull=True) | Employee.objects.filter(role='')
 
 #従業員追加
-class AddEmployeeView(CreateView):
+class AddEmployeeView(LoginRequiredMixin, CreateView):
     model = Employee
     form_class = EmployeeForm
     template_name = 'RestaurantEmpApp/AddEmployee.html'
     success_url = reverse_lazy('menu')
+
+    def get_initial(self):
+        initial = super().get_initial()
+        # ログインユーザー（店長）のshop_idを初期値にセット
+        initial['shop_id'] = self.request.user.shop_id
+        return initial
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # shop_idをreadonlyに
+        form.fields['shop_id'].widget.attrs['readonly'] = True
+        return form
+
+    def form_valid(self, form):
+        # shop_idを強制的に店長のshop_idに
+        form.instance.shop_id = self.request.user.shop_id
+        return super().form_valid(form)
 #従業員詳細ページ
 class DetailEmployeeView(TemplateView):
     template_name='RestaurantEmpApp/DetailEmployee.html'

@@ -17,29 +17,5 @@
 </form>
 
 
-<div style="display: flex; justify-content: center; align-items: center; min-height: 60vh;">
-  <div style="width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9; box-shadow: 0px 2px 6px rgba(0,0,0,0.1);">
 
-    <h2 style="text-align: center; margin-bottom: 20px;">ログイン</h2>
-
-    <form method="post">
-      {% csrf_token %}
-      
-      <label for="store_id">店舗ID</label>
-      <input type="text" id="store_id" name="store_id" placeholder="店舗IDを入力" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
-
-      <label for="employee_id">従業員ID</label>
-      <input type="text" id="employee_id" name="employee_id" placeholder="従業員IDを入力" style="width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
-
-      <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        送信
-      </button>
-    </form>
-
-    <p style="text-align: center; margin-top: 15px;">
-      <small>または新規登録</small>
-    </p>
-
-  </div>
-</div>
 {% endblock %}

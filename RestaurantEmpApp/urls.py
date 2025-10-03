@@ -7,7 +7,11 @@ urlpatterns = [
       #ログインページ
     path('', EmployeeLoginView.as_view(template_name='RestaurantEmpApp/login.html'), name='login'),
      # メニュー画面
-    path('menu/', MenuView.as_view(), name='menu'), 
+    path('menu/', MenuView.as_view(), name='menu'),
+    # #食べ物一覧
+    # path('food_list/',FoodListViews.as_view(),name='food_list'),
+    # #食べ物追加
+    # path('food_add/',FoodCreateView.as_view(),name='food_add'),
      # 従業員編集画面
   path('EditEmployee/', EditEmployeeView.as_view(), name='EditEmployee'),
   # 個別従業員編集ページ

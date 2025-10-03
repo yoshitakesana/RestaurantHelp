@@ -18,7 +18,17 @@ class DeleteEmployeeView(LoginRequiredMixin, DeleteView):
 class EmployeeLoginView(LoginView):
     template_name = 'RestaurantEmpApp/login.html'
     authentication_form = EmployeeLoginForm
-    
+
+    def form_valid(self, form):
+        user = form.get_user()
+        # ロールが空(null/空文字)ならログイン不可
+        if not user.role:
+            from django.contrib.auth import logout
+            logout(self.request)
+            form.add_error(None, '従業員（ロール未設定）はログインできません。')
+            return self.form_invalid(form)
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse_lazy('menu')
 

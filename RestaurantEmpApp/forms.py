@@ -4,9 +4,22 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import Employee
 from django.core.exceptions import ValidationError
 
+
 class EmployeeLoginForm(AuthenticationForm):
     username = forms.CharField(label="従業員ID")  # username に employee_id を使う場合
     password = forms.CharField(label="パスワード", widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        if username:
+            try:
+                user = Employee.objects.get(username=username)
+                if not user.role:
+                    raise ValidationError('従業員（ロール未設定）はログインできません。')
+            except Employee.DoesNotExist:
+                pass  # 通常の認証エラーに任せる
+        return cleaned_data
 
 
 class EmployeeCreateForm(forms.ModelForm):

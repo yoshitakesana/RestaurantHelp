@@ -15,13 +15,31 @@
 
 
 
-<h2>ログイン</h2>
-<p>店舗ID</p>
-<p>名前</p>
-<p>パスワード</p>
+<form method="post">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <ul>
+            {% for error in form.non_field_errors %}
+                <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
 
-<button type="submit">ログイン</button>
+        <p>
+            {{ form.employee_id.label_tag }}<br>
+            {{ form.employee_id }}
+        </p>
+        <p>
+            {{ form.shop_id.label_tag }}<br>
+            {{ form.shop_id }}
+        </p>
+        <p>
+            {{ form.password.label_tag }}<br>
+            {{ form.password }}
+        </p>
 
+        <button type="submit">ログイン</button>
+    </form>
 
 
 {% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'RestaurantEmpApp/base.html' %}
+{% block title %}食べ物一覧{% endblock %}
+{% block header %}
+<h1>食べ物一覧</h1>
+{% endblock %}
+{% block contents %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>価格</th>
+        <th>カテゴリ</th>
+        <th>画像パス</th>
+    </tr>
+    {% for food in foods %}
+    <tr>
+        <td>{{ food.product_id }}</td>
+        <td>{{ food.name }}</td>
+        <td>{{ food.price }}</td>
+        <td>{{ food.category }}</td>
+        <td>{{ food.image_path }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">データがありません</td></tr>
+    {% endfor %}
+</table>
+<p><a href="{% url 'food_add' %}">食べ物を追加する</a></p>
+{% endblock %}

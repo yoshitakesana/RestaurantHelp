@@ -1,5 +1,5 @@
 from django.urls import path, reverse_lazy
-from .views import EmployeeLoginView, EditEmployeeView, MenuView,AddEmployeeView,DetailEmployeeView,EditMenuView,DetailMenuView,AddMenuView,EditManagerView, DeleteEmployeeView
+from .views import EmployeeLoginView, EditEmployeeView, MenuView,AddEmployeeView,DetailEmployeeView,EditMenuView,DetailMenuView,AddMenuView,EditManagerView, DeleteEmployeeView, FoodListView, food_add
 from django.views.generic.edit import UpdateView
 from .models import Employee
 
@@ -8,10 +8,10 @@ urlpatterns = [
     path('', EmployeeLoginView.as_view(template_name='RestaurantEmpApp/login.html'), name='login'),
      # メニュー画面
     path('menu/', MenuView.as_view(), name='menu'),
-    # #食べ物一覧
-    # path('food_list/',FoodListViews.as_view(),name='food_list'),
-    # #食べ物追加
-    # path('food_add/',FoodCreateView.as_view(),name='food_add'),
+  # 食べ物一覧
+  path('food_list/', FoodListView.as_view(), name='food_list'),
+  # 食べ物追加
+  path('food_add/', food_add, name='food_add'),
      # 従業員編集画面
   path('EditEmployee/', EditEmployeeView.as_view(), name='EditEmployee'),
   # 個別従業員編集ページ
@@ -19,9 +19,9 @@ urlpatterns = [
   # 従業員削除
   path('DeleteEmployee/<int:pk>/', DeleteEmployeeView.as_view(), name='DeleteEmployee'),
     #従業員追加画面
-    path('AddEmployee/',AddEmployeeView.as_view(),name='AddEmployee'),
+  path('AddEmployee/',AddEmployeeView.as_view(),name='AddEmployee'),
     #選択した従業員の詳細画面
-    path('DetailEmployee/',DetailEmployeeView.as_view(),name='DetailEmployee'),
+  path('DetailEmployee/',DetailEmployeeView.as_view(),name='DetailEmployee'),
 
     #メニュー編集ページ
     path('EditMenu/',EditMenuView.as_view(),name='EditMenu'),

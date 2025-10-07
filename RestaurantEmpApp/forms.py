@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Employee
 from django.core.exceptions import ValidationError
+from .models import Food
 
 
 class EmployeeLoginForm(AuthenticationForm):
@@ -57,3 +58,7 @@ class EmployeeForm(forms.ModelForm):
             user.save()
         return user
 
+class FoodForm(forms.ModelForm):
+    class Meta:
+        model=Food
+        fields=['name','price','category','image_path','is_deleted']

@@ -1,12 +1,32 @@
 
+
 # 必要なimportを先頭にまとめる
 from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Employee
-from .forms import EmployeeLoginForm, EmployeeCreateForm, EmployeeForm
+from .models import Employee, Food
+from .forms import EmployeeLoginForm, EmployeeCreateForm, EmployeeForm, FoodForm
+
+# --- 食べ物一覧・追加ビューを先頭に ---
+class FoodListView(LoginRequiredMixin, ListView):
+    model = Food
+    template_name = 'RestaurantEmpApp/food_list.html'
+    context_object_name = 'foods'
+
+def food_add(request):
+    if request.method == "POST":
+        form = FoodForm(request.POST)
+        if form.is_valid():
+            food = form.save(commit=False)
+            # food.shop_id = request.user.shop_id  # shop_idがFoodモデルに必要なら追加
+            food.save()
+            return redirect('food_list')
+    else:
+        form = FoodForm()
+    return render(request, 'RestaurantEmpApp/food_add.html', {'form': form})
 
 # 従業員削除
 class DeleteEmployeeView(LoginRequiredMixin, DeleteView):
@@ -94,7 +114,25 @@ class AddMenuView(TemplateView):
 class EditManagerView(TemplateView):
     template_name='RestaurantEmpApp/EditManager.html'
 
+# 食べ物一覧
+from django.views.generic import ListView
+class FoodListView(LoginRequiredMixin, ListView):
+    model = Food
+    template_name = 'RestaurantEmpApp/food_list.html'
+    context_object_name = 'foods'
 
+# 食べ物追加
+def food_add(request):
+    if request.method == "POST":
+        form = FoodForm(request.POST)
+        if form.is_valid():
+            food = form.save(commit=False)
+            # food.shop_id = request.user.shop_id  # shop_idがFoodモデルに必要なら追加
+            food.save()
+            return redirect('food_list')
+    else:
+        form = FoodForm()
+    return render(request, 'RestaurantEmpApp/food_add.html', {'form': form})
 
 
 

@@ -6,7 +6,12 @@
 {% block contents %}
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p>店舗ID: {{ form.shop_id }}</p>
+    {{ form.name.label }}: {{ form.name }}<br>
+    {{ form.price.label }}: {{ form.price }}<br>
+    {{ form.category.label }}: {{ form.category }}<br>
+    {{ form.image_path.label }}: {{ form.image_path }}<br>
+    {{ form.is_deleted.label }}: {{ form.is_deleted }}<br>
     <button type="submit">追加</button>
 </form>
 {% endblock %}

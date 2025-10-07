@@ -60,5 +60,13 @@ class EmployeeForm(forms.ModelForm):
 
 class FoodForm(forms.ModelForm):
     class Meta:
-        model=Food
-        fields=['name','price','category','image_path','is_deleted']
+        model = Food
+        fields = ['name', 'price', 'category', 'image_path', 'is_deleted']
+
+    def __init__(self, *args, **kwargs):
+        shop_id = kwargs.pop('shop_id', None)
+        super().__init__(*args, **kwargs)
+        if shop_id:
+            self.fields['shop_id'] = forms.CharField(initial=shop_id, widget=forms.TextInput(attrs={'readonly': 'readonly'}), required=False, label='店舗ID')
+        else:
+            self.fields['shop_id'] = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}), required=False, label='店舗ID')

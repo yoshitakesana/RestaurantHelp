@@ -17,15 +17,16 @@ class FoodListView(LoginRequiredMixin, ListView):
     context_object_name = 'foods'
 
 def food_add(request):
+    shop_id = request.user.shop_id if request.user.is_authenticated else ''
     if request.method == "POST":
-        form = FoodForm(request.POST)
+        form = FoodForm(request.POST, shop_id=shop_id)
         if form.is_valid():
             food = form.save(commit=False)
-            # food.shop_id = request.user.shop_id  # shop_idがFoodモデルに必要なら追加
+            food.shop_id = shop_id
             food.save()
             return redirect('food_list')
     else:
-        form = FoodForm()
+        form = FoodForm(shop_id=shop_id)
     return render(request, 'RestaurantEmpApp/food_add.html', {'form': form})
 
 # 従業員削除

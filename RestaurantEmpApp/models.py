@@ -26,6 +26,8 @@ class Food(models.Model):
     category=models.CharField(max_length=50,blank=True,null=True)
     image_path=models.CharField(max_length=255,blank=True,null=True)
     is_deleted=models.BooleanField(default=False)
+    shop_id = models.CharField(max_length=50)
+
     
     def __str__(self):
         return f"{self.name} ({self.price}円)"

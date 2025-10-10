@@ -16,6 +16,25 @@ class FoodListView(LoginRequiredMixin, ListView):
     template_name = 'RestaurantEmpApp/food_list.html'
     context_object_name = 'foods'
 
+    def get_queryset(self):
+        # ログイン中のユーザーを取得
+        user = self.request.user
+
+        # 店舗IDを取得（EmployeeUserにshop_idがある想定）
+        shop_id = user.shop_id
+
+        # 同じ店舗のメニューだけ、削除されていないものを取得
+        return Food.objects.filter(shop_id=shop_id, is_deleted=False)
+
+    def get_context_data(self, **kwargs):
+        # 親クラスのメソッドで基本データを取得
+        context = super().get_context_data(**kwargs)
+
+        # ログイン中のユーザーの名前を追加
+        context['username'] = self.request.user.username
+
+        return context
+
 def food_add(request):
     shop_id = request.user.shop_id if request.user.is_authenticated else ''
     if request.method == "POST":

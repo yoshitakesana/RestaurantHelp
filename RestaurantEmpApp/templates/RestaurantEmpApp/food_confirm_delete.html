@@ -1,0 +1,12 @@
+{% extends 'RestaurantEmpApp/base.html' %}
+{% block title %}メニュー削除確認{% endblock %}
+{% block header %}
+<h1>メニュー削除確認</h1>
+{% endblock %}
+{% block contents %}
+<p>本当に「{{ object.name }}」を削除しますか？</p>
+<form method="post">{% csrf_token %}
+    <button type="submit">削除する</button>
+    <a href="{% url 'food_list' %}">キャンセル</a>
+</form>
+{% endblock %}

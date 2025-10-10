@@ -1,3 +1,4 @@
+<!--食べ物一覧・-->
 {% extends 'RestaurantEmpApp/base.html' %}
 {% block title %}食べ物一覧{% endblock %}
 {% block header %}
@@ -15,14 +16,16 @@
     {% for food in foods %}
     <tr>
         <td>{{ food.product_id }}</td>
-        <td>{{ food.name }}</td>
+        <td><a href="{% url 'food_edit' food.pk %}"></a>{{ food.name }}</a></td>
         <td>{{ food.price }}</td>
         <td>{{ food.category }}</td>
         <td>{{ food.image_path }}</td>
+        <td><a href="{% url 'food_edit' food.pk %}">編集</a></td>
     </tr>
     {% empty %}
     <tr><td colspan="5">データがありません</td></tr>
     {% endfor %}
-</table>
-<p><a href="{% url 'food_add' %}">食べ物を追加する</a></p>
+    </table>
+
+<p><a href="{% url 'food_add' %}">新規メニュー登録</a></p>
 {% endblock %}

@@ -1,17 +1,48 @@
 {% extends 'RestaurantEmpApp/base.html' %}
 {% block title %}食べ物追加{% endblock %}
+
 {% block header %}
-<h1>食べ物追加</h1>
+<h1>🍽 食べ物追加</h1>
 {% endblock %}
+
 {% block contents %}
-<form method="post">
-    {% csrf_token %}
-    <p>店舗ID: {{ form.shop_id }}</p>
-    {{ form.name.label }}: {{ form.name }}<br>
-    {{ form.price.label }}: {{ form.price }}<br>
-    {{ form.category.label }}: {{ form.category }}<br>
-    {{ form.image_path.label }}: {{ form.image_path }}<br>
-    {{ form.is_deleted.label }}: {{ form.is_deleted }}<br>
-    <button type="submit">追加</button>
-</form>
+<main>
+  <div class="card">
+    <h2>新しいメニューを登録</h2>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <small>※店舗IDは変更できません</small><br>
+        <label>店舗ID</label><br>
+        {{ form.shop_id }}
+      </div>
+
+      <div class="form-group">
+        <p>メニュー名</p>
+        {{ form.name }}
+      </div>
+
+      <div class="form-group">
+        <p>値段</p>
+        {{ form.price }}
+      </div>
+
+      <div class="form-group">
+        <p>カテゴリー</p>
+        {{ form.category }}
+      </div>
+
+      <div class="form-group">
+        <p>イメージ画像</p>
+        {{ form.image_path }}
+      </div>
+
+      <div style="text-align: center; margin-top: 24px;">
+        <button type="submit">＋ 追加</button>
+      </div>
+    </form>
+  </div>
+</main>
 {% endblock %}

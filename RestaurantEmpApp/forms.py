@@ -61,7 +61,7 @@ class EmployeeForm(forms.ModelForm):
 class FoodForm(forms.ModelForm):
     class Meta:
         model = Food
-        fields = ['name', 'price', 'category', 'image_path', 'is_deleted']
+        fields = ['name', 'price', 'category', 'image_path',]
 
     def __init__(self, *args, **kwargs):
         shop_id = kwargs.pop('shop_id', None)

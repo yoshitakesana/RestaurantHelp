@@ -6,7 +6,8 @@
 
 <!--ヘッダー部分-->
 {% block header %}
-<h1>ようこそ{{request.user.name}}店長様</h1>
+<h1>{{ user.username }} さん、ようこそ！</h1>
+
 <p>ログアウト</p>
 {% endblock %}
 

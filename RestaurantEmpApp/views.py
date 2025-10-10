@@ -29,6 +29,23 @@ def food_add(request):
         form = FoodForm(shop_id=shop_id)
     return render(request, 'RestaurantEmpApp/food_add.html', {'form': form})
 
+
+# 個別メニュー編集
+from django.views.generic.edit import UpdateView
+class FoodUpdateView(LoginRequiredMixin, UpdateView):
+    model = Food
+    form_class = FoodForm
+    template_name = 'RestaurantEmpApp/food_edit.html'
+    success_url = reverse_lazy('food_list')
+
+
+# 食べ物削除
+from django.views.generic.edit import DeleteView
+class FoodDeleteView(LoginRequiredMixin, DeleteView):
+    model = Food
+    template_name = 'RestaurantEmpApp/food_confirm_delete.html'
+    success_url = reverse_lazy('food_list')
+
 # 従業員削除
 class DeleteEmployeeView(LoginRequiredMixin, DeleteView):
     model = Employee
@@ -99,41 +116,19 @@ class DetailEmployeeView(TemplateView):
 
 
 
-#メニュー編集ページ
-class EditMenuView(TemplateView):
-    template_name='RestaurantEmpApp/EditMenu.html'
+
 
 #メニュー詳細ページ
 class DetailMenuView(TemplateView):
     template_name='RestaurantEmpApp/DetailMenu.html'
 
-#メニュー追加ページ
-class AddMenuView(TemplateView):
-    template_name='RestaurantEmpApp/AddMenu.html'
+
 
 #社員編集ページ
 class EditManagerView(TemplateView):
     template_name='RestaurantEmpApp/EditManager.html'
 
-# 食べ物一覧
-from django.views.generic import ListView
-class FoodListView(LoginRequiredMixin, ListView):
-    model = Food
-    template_name = 'RestaurantEmpApp/food_list.html'
-    context_object_name = 'foods'
 
-# 食べ物追加
-def food_add(request):
-    if request.method == "POST":
-        form = FoodForm(request.POST)
-        if form.is_valid():
-            food = form.save(commit=False)
-            # food.shop_id = request.user.shop_id  # shop_idがFoodモデルに必要なら追加
-            food.save()
-            return redirect('food_list')
-    else:
-        form = FoodForm()
-    return render(request, 'RestaurantEmpApp/food_add.html', {'form': form})
 
 
 

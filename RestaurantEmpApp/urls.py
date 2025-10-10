@@ -1,5 +1,18 @@
 from django.urls import path, reverse_lazy
-from .views import EmployeeLoginView, EditEmployeeView, MenuView,AddEmployeeView,DetailEmployeeView,EditMenuView,DetailMenuView,AddMenuView,EditManagerView, DeleteEmployeeView, FoodListView, food_add
+from .views import (
+  EmployeeLoginView,
+  EditEmployeeView,
+  MenuView,
+  AddEmployeeView,
+  DetailEmployeeView,
+  DetailMenuView,
+  EditManagerView,
+  DeleteEmployeeView,
+  FoodListView,
+  food_add,
+  FoodUpdateView,
+  FoodDeleteView,
+)
 from django.views.generic.edit import UpdateView
 from .models import Employee
 
@@ -12,6 +25,9 @@ urlpatterns = [
   path('food_list/', FoodListView.as_view(), name='food_list'),
   # 食べ物追加
   path('food_add/', food_add, name='food_add'),
+  # 個別メニュー編集
+  path('food_edit/<int:pk>/', FoodUpdateView.as_view(), name='food_edit'),
+  path('food_delete/<int:pk>/', FoodDeleteView.as_view(), name='food_delete'),
      # 従業員編集画面
   path('EditEmployee/', EditEmployeeView.as_view(), name='EditEmployee'),
   # 個別従業員編集ページ
@@ -23,12 +39,12 @@ urlpatterns = [
     #選択した従業員の詳細画面
   path('DetailEmployee/',DetailEmployeeView.as_view(),name='DetailEmployee'),
 
-    #メニュー編集ページ
-    path('EditMenu/',EditMenuView.as_view(),name='EditMenu'),
+  #メニュー編集ページ（一覧を使う）
+  path('EditMenu/', FoodListView.as_view(), name='EditMenu'),
     #メニュー詳細ページ
     path('DetailMenu/',DetailMenuView.as_view(),name='DetailMenu'),
-    #メニュー追加ページ
-    path('AddMenu/',AddMenuView.as_view(),name='AddMenu'),
+  #メニュー追加ページ（店長は food_add を使う）
+  path('AddMenu/', food_add, name='AddMenu'),
     
     #店長編集ページ
     path('EditManager/',EditManagerView.as_view(),name='EditManager')
